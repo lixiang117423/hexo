@@ -1,25 +1,20 @@
-﻿# Hexo Configuration
+# Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 小蓝哥的知识荒原
-subtitle: "蓝莲盛开，身心自在<br>活在当下，正向提升"
-description: 没有什么能够阻挡我对自由的向往^_^
-keywords: R,Python
+title: 🧬小蓝哥的知识荒原🧬
+subtitle: ''
+description: 活在当下，正向提升！
+keywords:
 author: 小蓝哥
-language: zh-Hans
-timezone: Asia/Shanghai
+language: zn-CN
+timezone: ''
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://www.blog4xiang.world
-root: /
-#permalink: :year/:month/:day/:title/
-permalink: posts/:abbrlink.html
-abbrlink:
-  alg: crc32  # 算法：crc16(default) and crc32
-  rep: hex    # 进制：dec(default) and hex
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: http://example.com
+permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
@@ -55,6 +50,11 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -62,7 +62,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 5
+  per_page: 8
   order_by: -date
 
 # Category & Tag
@@ -80,8 +80,8 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -97,82 +97,41 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: butterfly
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
--  type: git
-  #repository: git@github.com:lixiang117423/lixiang117423.github.io.git
-   repo: git@121.4.162.87:/var/repo/hexo.git
-  #branch: main
-   branch: master
--  type: baidu_url_submitter ## 添加这里内容即可
--  type: cjh_bing_url_submitter
--  type: cjh_baidu_url_submitter
+  type: git
+  repo: hexo@106.55.94.9:/home/hexo/blog.git
+  branch: master                           
+  message: '站点更新:{{now("YYYY-MM-DD HH:mm:ss")}}'
 
 search:
   path: search.xml
   field: post
-  format: html
-  limit: 10000
+  content: true
+  template: ./search.xml
 
-symbols_count_time:
-  symbols: true
-  time: true
-  total_symbols: true
-  total_time: true
-  exclude_codeblock: false
-
-# Add copy button on codeblock
-  copy_button: copy
-  enable: true  
-  show_result: true #是否显示提示的复制结果
-
-math:
-  engine: 'mathjax' # or 'katex'
-  mathjax:
-    # src: custom_mathjax_source
-    config:
-      # MathJax config
-
-# 自动生成sitemap
-sitemap:
-  path: sitemap.xml
-baidusitemap:
-  path: baidusitemap.xml
-
-baidu_url_submit:
-  count: 100               # 提交最新的多少个链接
-  host: www.blog4xiang.world    # 在百度站长平台中添加的域名
-  token: q8xZJUGA4EeU9E8U     # 秘钥
-  path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
-
-hexo_submit_urls_to_search_engine:
-  # 提交最新的 n 个链接
-  count: 100
-  # 提交修改时间在 n 秒内的链接，单位秒。例如：
-  # 有两个文件 a.txt 和 b.txt，分别对应 https://yoursite.com/a.txt 和 https://yoursite.com/b.txt
-  # 其更新时间距当前分别为 800s 和 1000s（period 字段设为 900）
-  # 则 https://yoursite.com/a.txt 会被提交，https://yoursite.com/b.txt 不会
-  period: 900
-  # 提交链接的条件，可选值：count | period。不同取值的含义如下：
-  # count ：应用上述的 count  配置项
-  # period：应用上述的 period 配置项
-  submit_condition: count
-  # 是否向 Google 提交，可选值：1 | 0（0：否；1：是）
-  google: 0
-  # 是否向 Bing 提交，可选值：1 | 0（0：否；1：是）
-  bing: 1
-  # 是否向 Baidu 提交，可选值：1 | 0（0：否；1：是）
-  baidu: 1
-  # 文本文档的地址，要推送的链接会保存在此文本文档里
-  txt_path: submit_urls.txt
-  # 在百度站长平台中注册的域名
-  baidu_host: https://www.blog4xiang.world/
-  # 百度自动推送 API 的 token（获取方式见插件文档：https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html）
-  baidu_token: q8xZJUGA4EeU9E8U
-  # 在必应站长平台中注册的域名
-  bing_host: https://www.blog4xiang.world/
-  # 必应自动推送 API 的 token（获取方式见插件文档：https://cjh0613.com/20200603HexoSubmitUrlsToSearchEngine.html）
-  bing_token: 2670e169aa4b40259c824c3698f1abad
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+  anchors:
+    level: 2
+    collisionSuffix: 'v'
+    permalink: true
+    permalinkClass: header-anchor
+    permalinkSymbol: ¶

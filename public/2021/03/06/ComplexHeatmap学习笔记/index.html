@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="zn-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ComplexHeatmap学习笔记 | 🧬小蓝哥的知识荒原🧬</title><meta name="keywords" content="R语言"><meta name="author" content="小蓝哥"><meta name="copyright" content="小蓝哥"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="之前绘制热图都是使用pheatmap这个R包，后面">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ComplexHeatmap学习笔记">
+<meta property="og:url" content="http://example.com/2021/03/06/%C2%96ComplexHeatmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="🧬小蓝哥的知识荒原🧬">
+<meta property="og:description" content="之前绘制热图都是使用pheatmap这个R包，后面">
+<meta property="og:locale" content="zn_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2021-03-06T06:11:08.000Z">
+<meta property="article:modified_time" content="2021-03-06T07:45:41.359Z">
+<meta property="article:author" content="小蓝哥">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2021/03/06/%C2%96ComplexHeatmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 小蓝哥","link":"Link: ","source":"Source: 🧬小蓝哥的知识荒原🧬","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'ComplexHeatmap学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-03-06 15:45:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">🧬小蓝哥的知识荒原🧬</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">ComplexHeatmap学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-03-06T06:11:08.000Z" title="Created 2021-03-06 14:11:08">2021-03-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-03-06T07:45:41.359Z" title="Updated 2021-03-06 15:45:41">2021-03-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/R%E8%AF%AD%E8%A8%80/">R语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="ComplexHeatmap学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>之前绘制热图都是使用<code>pheatmap</code>这个R包，后面<span id="more"></span>了解到一个包叫<a target="_blank" rel="noopener" href="https://github.com/stemangiola/tidyHeatmap"><code>tidyHeatmap</code></a>，开始使用的时候觉得比较惊艳，数据格式是<code>tidy</code>的，比较熟悉些。后面自己要绘制比较复杂的热图，感觉<code>tidyHeatmap</code>不够用，索性直接学<code>ComplexHeatmap</code>。</p>
+<h1>我对<code>ComplexHeatmap</code>的理解</h1>
+<p><code>ComplexHeatmap</code>是基于<code>grid</code>绘图系统的，对<code>grid</code>绘图系统了解不多，但是学习完<code>ComplexHeatmap</code>给我的感受是就像<code>ggplot2</code>那样，丝滑无比。我把<code>ComplexHeatmap</code>里面的各种注释、图列理解成了<code>ggplot2</code>里面的图层，不同的图层之间通过唯一的<code>key</code>来实现的。</p>
+<h1>示例代码</h1>
+<p>下面的示例代码我会选择性注释，未注释的代码行多为<code>R</code>基础。</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 15_15VS87_87</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">F</span>) &#123;</span><br><span class="line">  <span class="comment"># 选择画图的数据</span></span><br><span class="line">  col = <span class="built_in">c</span>(<span class="string">&#x27;Index&#x27;</span>,</span><br><span class="line">          paste(str_split(<span class="string">&#x27;15_15VS87_87&#x27;</span>,<span class="string">&#x27;VS&#x27;</span>)[[<span class="number">1</span>]][<span class="number">1</span>],<span class="number">1</span>:<span class="number">3</span>, sep = <span class="string">&#x27;_&#x27;</span>),</span><br><span class="line">          paste(str_split(<span class="string">&#x27;15_15VS87_87&#x27;</span>,<span class="string">&#x27;VS&#x27;</span>)[[<span class="number">1</span>]][<span class="number">2</span>],<span class="number">1</span>:<span class="number">3</span>, sep = <span class="string">&#x27;_&#x27;</span>))</span><br><span class="line">    </span><br><span class="line">  <span class="comment"># 筛选数据</span></span><br><span class="line">  df.sub = dplyr::select(metadata, col) %&gt;%</span><br><span class="line">    dplyr::filter(Index %in% df[df$group_by == <span class="string">&#x27;15_15VS87_87&#x27;</span>,]$Index) %&gt;%</span><br><span class="line">    as.data.frame()</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 合并数据</span></span><br><span class="line">  df.sub = merge(df.sub, metainfo[,<span class="built_in">c</span>(<span class="string">&#x27;Index&#x27;</span>,<span class="string">&#x27;物质&#x27;</span>)])</span><br><span class="line">  </span><br><span class="line">  col.names = colnames(df.sub)[<span class="number">2</span>:<span class="number">7</span>]</span><br><span class="line">  </span><br><span class="line">  rownames(df.sub) = df.sub$物质</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  df.sub = df.sub[,<span class="number">2</span>:<span class="number">7</span>] %&gt;% <span class="comment"># 选择数据</span></span><br><span class="line">    apply(<span class="number">1</span>, scale) %&gt;% <span class="comment"># 按行对数据进行标准化</span></span><br><span class="line">    t() %&gt;% <span class="comment"># 行列转换</span></span><br><span class="line">    as.data.frame()</span><br><span class="line">  </span><br><span class="line">  colnames(df.sub) = col.names</span><br><span class="line">  </span><br><span class="line">  ann = df[df$group_by == <span class="string">&#x27;15_15VS87_87&#x27;</span>,] <span class="comment"># 筛选代谢物的信息，分组筛选</span></span><br><span class="line">  ann = merge(ann, metainfo, by = <span class="string">&#x27;Index&#x27;</span>) %&gt;% as.data.frame() <span class="comment"># 从原始数据中筛选代谢物信息</span></span><br><span class="line">  rownames(ann) = ann$物质 <span class="comment"># 将注释信息数据框的行名称设置成代谢物名称</span></span><br><span class="line">  ann = ann[rownames(df.sub),] <span class="comment"># 将代谢物注释信息和热图数据框进行匹配，这个就是上面提到的key</span></span><br><span class="line">  ann$<span class="built_in">signif</span> = ifelse(ann$pvalue &lt; <span class="number">0.001</span>, <span class="string">&#x27;***&#x27;</span>,</span><br><span class="line">                      ifelse(ann$pvalue &gt; <span class="number">0.01</span>, <span class="string">&#x27;*&#x27;</span>,<span class="string">&#x27;**&#x27;</span>)) <span class="comment"># 根据p值标注显著性</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 热图左边的注释</span></span><br><span class="line">  ann.left = HeatmapAnnotation(which = <span class="string">&#x27;row&#x27;</span>, <span class="comment"># 表明这是行的注释</span></span><br><span class="line">                               <span class="comment"># 柱状图注释</span></span><br><span class="line">                               `OPLS-DA VIP Value` = anno_barplot(ann$VIP,<span class="comment"># 选择数据来源</span></span><br><span class="line">                                                                  baseline = <span class="number">1</span>, <span class="comment"># 柱状图基线</span></span><br><span class="line">                                                                  <span class="comment"># 设置颜色及填充色等</span></span><br><span class="line">                                                                  gp = gpar(fill = <span class="number">1</span>:nrow(ann),</span><br><span class="line">                                                                            col = <span class="string">&#x27;white&#x27;</span>)),</span><br><span class="line">                               <span class="comment"># 同上</span></span><br><span class="line">                               FoldChange = anno_barplot(ann$FC,</span><br><span class="line">                                                         <span class="comment"># bar_width = 1,</span></span><br><span class="line">                                                         gp = gpar(fill = <span class="number">1</span>:nrow(ann),</span><br><span class="line">                                                                   col = <span class="string">&#x27;white&#x27;</span>)),</span><br><span class="line">                               gap = unit(<span class="number">3</span>,<span class="string">&#x27;mm&#x27;</span>), <span class="comment"># 两个注释信息之间的间隔</span></span><br><span class="line">                               annotation_name_side = <span class="string">&#x27;top&#x27;</span>, <span class="comment"># 注释信息的名称</span></span><br><span class="line">                               annotation_name_rot = <span class="number">90</span>, <span class="comment"># 注释信息名称的旋转角度</span></span><br><span class="line">                               annotation_name_offset = unit(<span class="number">2</span>,<span class="string">&#x27;mm&#x27;</span>)) <span class="comment"># 注释信息名称的偏移量</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 热图顶部注释：此处只是简单地添加分组信息</span></span><br><span class="line">  ann.top = HeatmapAnnotation(which = <span class="string">&#x27;column&#x27;</span>,</span><br><span class="line">                              <span class="comment">#Group = rep(c(&#x27;15_15&#x27;,&#x27;15_69&#x27;), each = 3),</span></span><br><span class="line">                              Group = anno_block(gp = gpar(fill = <span class="string">&#x27;black&#x27;</span>),</span><br><span class="line">                                                 labels = <span class="built_in">c</span>(<span class="string">&#x27;87_87&#x27;</span>,<span class="string">&#x27;15_15&#x27;</span>), <span class="comment"># 手动调整分组</span></span><br><span class="line">                                                 labels_gp = gpar(col = <span class="string">&#x27;white&#x27;</span>, fontsize = <span class="number">15</span>)))</span><br><span class="line">  <span class="comment"># 右侧注释</span></span><br><span class="line">  ann.right = HeatmapAnnotation(which = <span class="string">&#x27;row&#x27;</span>,</span><br><span class="line">                                gap = unit(<span class="number">1.5</span>,<span class="string">&#x27;mm&#x27;</span>), </span><br><span class="line">                                pvalue = anno_simple(ann$pvalue, </span><br><span class="line">                                                     col = pvalue_col_fun,</span><br><span class="line">                                                     pch = ann$<span class="built_in">signif</span>), <span class="comment"># 只能显示1个*，多余的要手动加</span></span><br><span class="line">                                一级分类 = ann$物质一级分类,</span><br><span class="line">                                二级分类 = ann$物质二级分类,</span><br><span class="line">                                annotation_name_side = <span class="string">&#x27;top&#x27;</span>,</span><br><span class="line">                                annotation_name_rot = <span class="number">90</span>,</span><br><span class="line">                                annotation_name_offset = unit(<span class="number">2</span>,<span class="string">&#x27;mm&#x27;</span>))</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 定义P值的颜色等</span></span><br><span class="line">  pvalue_col_fun = colorRamp2(<span class="built_in">c</span>(<span class="built_in">min</span>(ann$pvalue), </span><br><span class="line">                                mean(ann$pvalue), </span><br><span class="line">                                <span class="built_in">max</span>(ann$pvalue)), </span><br><span class="line">                              <span class="built_in">c</span>(<span class="string">&quot;green&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;red&quot;</span>)) </span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 设置P值的图例等</span></span><br><span class="line">  lgd_pvalue = Legend(title = <span class="string">&#x27;P-value&#x27;</span>,</span><br><span class="line">                      col_fun = pvalue_col_fun,</span><br><span class="line">                      at = <span class="built_in">c</span>(<span class="built_in">min</span>(ann$pvalue), </span><br><span class="line">                             mean(ann$pvalue), </span><br><span class="line">                             <span class="built_in">max</span>(ann$pvalue)),</span><br><span class="line">                      </span><br><span class="line">                      labels = <span class="built_in">c</span>(<span class="built_in">round</span>(<span class="built_in">min</span>(ann$pvalue), <span class="number">5</span>), </span><br><span class="line">                                 <span class="built_in">round</span>(mean(ann$pvalue), <span class="number">5</span>), </span><br><span class="line">                                 <span class="built_in">round</span>(<span class="built_in">max</span>(ann$pvalue), <span class="number">5</span>)))</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 绘制热图</span></span><br><span class="line">  p = ComplexHeatmap::Heatmap(as.matrix(df.sub), <span class="comment"># 输入数据为矩阵</span></span><br><span class="line">                              name = <span class="string">&#x27;相对含量&#x27;</span>, <span class="comment"># 热图图例名称</span></span><br><span class="line">                              col = <span class="built_in">c</span>(<span class="string">&quot;navy&quot;</span>, <span class="string">&quot;white&quot;</span>, <span class="string">&quot;firebrick3&quot;</span>), <span class="comment"># 定义颜色</span></span><br><span class="line">                              column_km = <span class="number">2</span>, <span class="comment"># 划分列聚类</span></span><br><span class="line">                              row_km = <span class="number">2</span>, <span class="comment"># 划分行聚类</span></span><br><span class="line">                              border = <span class="literal">TRUE</span>, <span class="comment"># 显示边框</span></span><br><span class="line">                              column_names_rot = <span class="number">90</span>, <span class="comment"># 列名称旋转角度</span></span><br><span class="line">                              row_names_rot = <span class="number">45</span>, <span class="comment"># 行名称旋转角度</span></span><br><span class="line">                              left_annotation = ann.left, <span class="comment"># 添加左侧注释信息</span></span><br><span class="line">                              top_annotation = ann.top, <span class="comment"># 添加顶部注释信息</span></span><br><span class="line">                              right_annotation = ann.right, <span class="comment"># 添加右侧注释信息</span></span><br><span class="line">                              row_title = <span class="string">&#x27;Metabolites&#x27;</span>, <span class="comment"># 行名称</span></span><br><span class="line">                              column_title = <span class="string">&#x27;Group&#x27;</span>, <span class="comment"># 列名称</span></span><br><span class="line">                              width = ncol(df.sub)*unit(<span class="number">10</span>, <span class="string">&quot;mm&quot;</span>), <span class="comment"># 格子的宽度</span></span><br><span class="line">                              height = nrow(df.sub)*unit(<span class="number">10</span>, <span class="string">&quot;mm&quot;</span>)) <span class="comment"># 格子的高度</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 保存图片</span></span><br><span class="line">  pdf(file = <span class="string">&#x27;results/heatmap/complexheatmap/15_15VS87_87_1.pdf&#x27;</span>, width = <span class="number">15</span>, height = <span class="number">20</span>, family = <span class="string">&#x27;GB1&#x27;</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 绘图</span></span><br><span class="line">  draw(p, </span><br><span class="line">       merge_legend = <span class="literal">TRUE</span>, <span class="comment"># 图例在一列上</span></span><br><span class="line">       annotation_legend_list = <span class="built_in">list</span>(lgd_pvalue))</span><br><span class="line">  </span><br><span class="line">  dev.off() <span class="comment"># 关闭绘图设备</span></span><br></pre></td></tr></table></figure>
+<img src="/2021/03/06/%C2%96ComplexHeatmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/1.jpg" class="">
+<blockquote>
+<p>💌lixiang117423@foxmail.com<br>
+💌lixiang117423@gmail.com</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">小蓝哥</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2021/03/06/%C2%96ComplexHeatmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2021/03/06/%C2%96ComplexHeatmap%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/R%E8%AF%AD%E8%A8%80/">R语言</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/03/07/%E9%85%9A%E9%85%B8%E6%98%AF%E4%B8%8D%E6%98%AF%E6%B0%B4%E7%A8%BB%E4%B8%AD%E7%9A%84%E5%8C%96%E6%84%9F%E7%89%A9%E8%B4%A8/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">酚酸是不是水稻中的化感物质</div></div></a></div><div class="next-post pull-right"><a href="/2021/03/05/MiKTeX%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">MiKTeX安装报错解决办法</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/07/06/GENIE3%E6%9E%84%E5%BB%BA%E5%9F%BA%E5%9B%A0%E8%B0%83%E6%8E%A7%E7%BD%91%E7%BB%9C/" title="GENIE3构建基因调控网络"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-06</div><div class="title">GENIE3构建基因调控网络</div></div></a></div><div><a href="/2021/03/05/MiKTeX%E5%AE%89%E8%A3%85%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" title="MiKTeX安装报错解决办法"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-05</div><div class="title">MiKTeX安装报错解决办法</div></div></a></div><div><a href="/2021/01/04/NMDS%E5%88%86%E6%9E%90/" title="NMDS分析"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-04</div><div class="title">NMDS分析</div></div></a></div><div><a href="/2020/01/07/PCA%E5%92%8CPERMANOVA%E5%88%86%E6%9E%90/" title="PCA和PERMANOVA分析"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-07</div><div class="title">PCA和PERMANOVA分析</div></div></a></div><div><a href="/2020/01/07/PCA%E5%9C%A8R%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="PCA在R语言中的实现"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-07</div><div class="title">PCA在R语言中的实现</div></div></a></div><div><a href="/2021/01/18/R%E8%AF%AD%E8%A8%80%E5%B8%B8%E7%94%A8Tips/" title="R语言常用Tips"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-01-18</div><div class="title">R语言常用Tips</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">我对ComplexHeatmap的理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">示例代码</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2021 By 小蓝哥</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">簡</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

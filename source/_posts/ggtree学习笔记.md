@@ -4,6 +4,7 @@ tags: R语言
 categories: R语言
 abbrlink: fb57811f
 date: 2021-02-15 10:35:58
+cover: /img/cover/cggtree.png
 ---
 
 # 写在前面

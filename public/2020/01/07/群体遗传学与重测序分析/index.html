@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="zn-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>群体遗传学与重测序分析 | 🧬小蓝哥的知识荒原🧬</title><meta name="keywords" content="生物信息学"><meta name="author" content="小蓝哥"><meta name="copyright" content="小蓝哥"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="分子层面对生物的研究，在个体水平上主要是看单个基因的变化以及全转录本的变化（RNA-seq）；在对个体的研究的基础上，开始了群体水平的研究。如果说常规的遗传学主要的研究对象是个体或者个体家系的话，那么群体遗传学则是主要研究由不同个体组成的群体的遗传规律。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="群体遗传学与重测序分析">
+<meta property="og:url" content="http://example.com/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="🧬小蓝哥的知识荒原🧬">
+<meta property="og:description" content="分子层面对生物的研究，在个体水平上主要是看单个基因的变化以及全转录本的变化（RNA-seq）；在对个体的研究的基础上，开始了群体水平的研究。如果说常规的遗传学主要的研究对象是个体或者个体家系的话，那么群体遗传学则是主要研究由不同个体组成的群体的遗传规律。">
+<meta property="og:locale" content="zn_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-01-07T07:23:30.000Z">
+<meta property="article:modified_time" content="2021-02-02T07:38:44.107Z">
+<meta property="article:author" content="小蓝哥">
+<meta property="article:tag" content="生物信息学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: true,
+    post: true
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: 小蓝哥","link":"Link: ","source":"Source: 🧬小蓝哥的知识荒原🧬","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '群体遗传学与重测序分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-02 15:38:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">74</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">🧬小蓝哥的知识荒原🧬</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">群体遗传学与重测序分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-01-07T07:23:30.000Z" title="Created 2020-01-07 15:23:30">2020-01-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-02-02T07:38:44.107Z" title="Updated 2021-02-02 15:38:44">2021-02-02</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/">生物信息学</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">5.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>17min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="群体遗传学与重测序分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>分子层面对生物的研究，在个体水平上主要是看单个基因的变化以及全转录本的变化（RNA-seq）；在对个体的研究的基础上，开始了群体水平的研究。如果说常规的遗传学主要的研究对象是个体或者个体家系的话，那么群体遗传学则是主要研究由不同个体组成的群体的遗传规律。</p>
+<span id="more"></span>
+<p>在测序技术大力发展之前，对群体主要是依靠表型进行研究，如加拉巴哥群岛的13中鸟雀有着不同的喙，达尔文认为这是自然选择造成的后果$<sup>{[1]}$。达尔文的进化论对应的观点可以简单概括为“物竞天择，适者生存”，这也是最为大众所接受的一种进化学说。直到1968年，日本遗传学家提出了中性进化理论$</sup>{[2]}$，也叫中性演化理论。中性理论的提出很大程度上是基于分子生物化学的发展。可以这样理解中性理论：一群人抽奖，在没有内幕的情况下，每个人抽到一等奖的概率是相等的，这个可能性和参与抽奖的人的身高、年龄、爱好等因素都没有关系。中性理论常作为群体遗传研究中的假设理论（CK）来计算其他各种统计指标。<br>
+群体遗传学，研究的单位是群体，比如粳稻、籼稻、野生稻，就能够构成不同的群体；我们国内的各省份的水稻也可以作为一个个群体。 群体遗传学大概可以分为群体内的研究和群体间的研究。比如研究云南元阳的水稻的遗传多样性；如果研究是的云南元阳的水稻和东北的水稻，那就可以算成是群体间的研究。群体间和群体内的研究是相互的。<br>
+测序价格的急剧下降$^{[3]}$使得大规模的群体测序得以实现。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/1.jpg" class="">
+<hr>
+<h1>几种变异类型</h1>
+<p>常见的变异类型有SNP、IdDel、SV、CNV等。重测序中最关注的是SNP，其次是InDel。其他的几种结构变异的研究不是太多。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/2.png" class="">
+<h1>重测序和从头组装</h1>
+<p>有参考基因组的物种的全基因组测序叫做重测序，没有参考基因组的物种的全基因组测序则需要从头组装。随着测序价格的降低，越来越多物种的参考基因组都已经测序组装完成。<em>plant genomes</em>$^{[4]}$网站实时显示全基因组测序已经完成的植物，其中2012年以后爆发式增长。在群体遗传学研究中更多的是有参考基因组的物种，尤其是模式物种，植物中常见的是拟南芥、水稻和玉米。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/3.png" class="">
+<h1>重测序分析流程</h1>
+<p>主要的分析流程见下图。现在的测序公司基本上都会帮客户完成整个的分析流程，因为主要耗费的资源是计算资源。我认为在整个分析的流程中最重要的是Linux目录的构建，混乱的目录会导致后续的分析频频出问题，重测序分析会生成很多的中间文件，良好的目录管理会使得项目分析流程井然有序。<br>
+该部分涉及到的软件的安装和基础的Linux基础知识就不详细说明了。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/4.png" class="">
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/5.png" class="">
+<h1>群体进化选择</h1>
+<h2 id="正选择"><a class="header-anchor" href="#正选择">¶</a>正选择</h2>
+<p>正选择似乎可以更好地用自然选择来解释。就是一个基因or位点能够使个体有着更强的生存力或者是育性，这样就会使得这个个体的后代更多，如此一来，这个基因or位点在群体中就越来越多。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/6.png" class="">
+<p>正选择能够使有利的突变基因or位点在群体中得到传播，但是与此同时却降低了群体的多态性水平。也就是说原先该位点周围的核苷酸组成是多样性的，在经过正选择之后，这个位点周围核苷酸的多样性就渐渐的趋于同质化了。这就好比一块田，里面本来有水稻和稗草及其他杂草，由于稗草的适应性增强，稗草在逐渐增多，水稻慢慢变少，最后甚至是只剩下了稗草。<br>
+我们将这种选择之后多态性降低的情况叫做选择扫荡（Selective Sweep)。检测选择扫荡的软件有SweeD$^{[7]}$。选择扫荡有可能是人工选择的结果，如2014年 Nature Genetics关于非洲栽培稻的文章就使用了SweeD来检测非洲栽培稻基因组上受人工选择的区域$^{[8]}$。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/7.png" class="">
+<h2 id="负选择"><a class="header-anchor" href="#负选择">¶</a>负选择</h2>
+<p>负选择和正选择刚好是相反的。简单理解成群体中的某个个体出现了一个致命的突变，从而自己或者是后代从群体中被淘汰。这也导致群体中该位点的多态性的降低。就好比我有10株水稻，其中一株在成长过程中突然不见了，那么对我的这个小的水稻群体来说，这个消失的水稻的独有的位点在群体中就不见了，整体的多态性就降低了。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/8.png" class="">
+<h2 id="平衡选择"><a class="header-anchor" href="#平衡选择">¶</a>平衡选择</h2>
+<p>平衡选择指多个等位基因在一个群体的基因库中以高于遗传漂变预期的频率被保留，如杂合子优势。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/9.png" class="">
+<p>平衡选择检测的算法有BetaScan2$^{[10]}$，这是个Python脚本，输入文件只需要过滤好的SNP数据即可。</p>
+<hr>
+<h1>群体遗传学中的统计指标</h1>
+<h2 id="群体多态性参数"><a class="header-anchor" href="#群体多态性参数">¶</a>群体多态性参数</h2>
+<p>计算公式为：<br>
+$$\theta = 4N_e\mu$$<br>
+其中$N_e$是有效群体大小，$\mu$是每个位点的突变速率。<em>但是群体大小往往是无法精确知道的，需要对其进行估计。</em></p>
+<h2 id="分离位点数目"><a class="header-anchor" href="#分离位点数目">¶</a>分离位点数目</h2>
+<p>分离位点数$\theta_w$是$\theta$的估计值，表示相关基因在多序列比对中表现出多态性的位置。计算公式为：<br>
+$$\theta_w = \frac{K}{a_n}$$<br>
+其中$K$为分离位点数量，比如SNP数量。<br>
+$a_n$为个体数量的倒数和：<br>
+$$a_n = \sum^{n-1}_{i = 1}\frac{1}{i}$$</p>
+<h2 id="核苷酸多样性-pi"><a class="header-anchor" href="#核苷酸多样性-pi">¶</a>核苷酸多样性$\pi$</h2>
+<p>$\pi$指的是核苷酸多样性，值越大说明核苷酸多样性越高。通常用于衡量群体内的核苷酸多样性，也可以用来推演进化关系$^{[11]}$。计算公式为：<br>
+$$\pi = \sum_{ij}x_ix_j\pi_{ij}=2*\sum_{i = 2}<sup>{n}\sum_{j=1}</sup>{i-1}x_ix_j\pi{ij}$$<br>
+可以理解成现在群体内两两求$\pi$，再计算群体的均值。计算的软件最常见的是<em>vcftools</em>，也有对应的R包<em>PopGenome</em>。通常是选定有一定的基因组区域，设定好窗口大小，然后滑动窗口进行计算。<br>
+3KRGP文章就计算了水稻不同亚群间4号染色体部分区域上的$\pi$值$<sup>{[12]}$，能够看出控制水稻籽粒落粒性的基因*Sh4*$</sup>{[13]}$位置多态性在所有的亚群中都降低了。说明这个基因在所有的亚群中都是受到选择的，这可能是人工选择的结果。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/11.png" class="">
+<h2 id="群体内选择检验：Tajima’s-D"><a class="header-anchor" href="#群体内选择检验：Tajima’s-D">¶</a>群体内选择检验：Tajima’s D</h2>
+<p>Tajima’s D是日本学者Tajima Fumio 1989年提出的一种统计检验方法，用于检验DNA序列在演化过程中是否遵循中性演化模型$^{[14]}$。计算公式为：<br>
+$$D=\frac{\pi-\theta_w}{\sqrt{V(\pi-\theta_w)}}$$<br>
+D值大小有如下三种生物学意义：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/12.png" class="">
+<h2 id="群体间分歧度检验：-F-st"><a class="header-anchor" href="#群体间分歧度检验：-F-st">¶</a>群体间分歧度检验：<em>$F_{st}$</em></h2>
+<p>$F_{st}$叫固定分化指数，用于估计亚群间平均多态性大小与整个种群平均多态性大小的差异，反映的是群体结构的变化。其简单估计的计算公式为：<br>
+$$F_{st}=\frac{\pi_{Between}-\pi_{Within}}{\pi_{Between}}$$<br>
+$F_{st}$的取值范围是[0,1]。当$F_{st}=1$时，表明亚群间有着明显的种群分化。<br>
+在中性进化条件下，$F_{st}$的大小主要取决于遗传漂变和迁移等因素的影响。假设种群中的某个等位基因因为对特定的生境的适应度较高而经历适应性选择，那该基因的频率在种群中会升高，种群的分化水平增大，使得种群有着较高的$F_{st}$值。<br>
+$F_{st}$值可以和GWAS的结果一起进行分析，$F_{st}$超过一定阈值的区域往往和GWAS筛选到的位点是一致的，如2018年棉花重测序的文章$^{[15]}$：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/13.png" class="">
+<h2 id="群体分歧度检验：ROD"><a class="header-anchor" href="#群体分歧度检验：ROD">¶</a>群体分歧度检验：ROD</h2>
+<p>ROD可以基于野生群体和驯化群体间核苷酸多态性参数$\pi$的差异识别选择型号，也可以测量驯化群体和野生型群体相比损失的多态性。计算公式为：<br>
+$$ROD=1-\frac{\pi_{驯化群体}}{\pi_{野生群体}}$$<br>
+和$F_{st}$一样，ROD也可以和GWAS结合起来：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/14.png" class="">
+<h1>群体结构分析</h1>
+<p>群体结构分析可以简单理解成采样测序的这些个体可以分成几个小组，以及给每个个体之间的远近关系是怎么样的。群体结构分析三剑客， 分别是<em>进化树</em>、<em>PCA</em>和<em>群体结构图</em>。</p>
+<h2 id="进化树"><a class="header-anchor" href="#进化树">¶</a>进化树</h2>
+<p>进化树就是将个体按照远近关系分别连接起来的图。</p>
+<h3 id="进化树算法"><a class="header-anchor" href="#进化树算法">¶</a>进化树算法</h3>
+<h4 id="基于距离"><a class="header-anchor" href="#基于距离">¶</a>基于距离</h4>
+<ul>
+<li>非加权算术平均对群法UPGMA</li>
+<li>邻接法Neighbor-joining</li>
+</ul>
+<h4 id="基于特征"><a class="header-anchor" href="#基于特征">¶</a>基于特征</h4>
+<ul>
+<li>最大简约法—最小变化数（祖先状态最小化）</li>
+<li>最大似然法—所有枝长和模型参数最优化</li>
+<li>贝叶斯推断—基于后验概率</li>
+</ul>
+<h3 id="进化树类型"><a class="header-anchor" href="#进化树类型">¶</a>进化树类型</h3>
+<ul>
+<li>有根树<br>
+有根树就是所有的个体都有一个共同的祖先。就像这样的：<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/15.png" class="">
+</li>
+<li>无根树<br>
+无根树只展示个体间的距离，无共同祖先，就像这样的：<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/16.png" class="">
+</li>
+</ul>
+<h3 id="进化树软件"><a class="header-anchor" href="#进化树软件">¶</a>进化树软件</h3>
+<p>常用的绘图软件是<em>Phylip</em>和<em>Snpphylo</em>。进化树修饰的软件有<em>MEGA</em>，<em>ggtree</em>等，推荐网页版工具<a target="_blank" rel="noopener" href="https://itol.embl.de/">iTOL</a>，无比强大。<br>
+外群定根法：当群体的个体的差异很小时，可以引入其他物种作为根。如在对三叶草建树时可以引入水稻的序列作为根进行建树。</p>
+<h2 id="PCA图"><a class="header-anchor" href="#PCA图">¶</a>PCA图</h2>
+<p>PCA是很常见的降维方法，如微生物研究中常用来检验样品分群情况。PCA计算的软件很多，plink可以直接用vcf文件计算PCA，R语言也可以进行PCA计算。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/17.png" class="">
+<p>PCA图在群体重测序中有如下几种作用：</p>
+<ul>
+<li>查看分群信息，就是测序的样品大概分成几个群。如2015年大豆重测序文章的图[17]:<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/18.png" class="">
+</li>
+<li>检测离群样本<br>
+离群样本就是在PCA图看起来和其他样本差异很大的样本，有可能是这个样本的遗传背景和其他样本本来就很大，也有可能是样本混淆了，比如了将野生型的样本标记成了驯化种进行测序。如果有离群样本，那在后续的类似于GWAS的分析中就需要将离群样本进行剔除。当然如果样本本来就是个很特别的，那就另当别论。</li>
+<li>推断亚群进化关系<br>
+可以从PCA图可以看出群体的进化关系，尤其是地理位置的进化关系。<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/19.png" class="">
+</li>
+</ul>
+<h2 id="群体分层图"><a class="header-anchor" href="#群体分层图">¶</a>群体分层图</h2>
+<p>进化树和PCA能够看出来群体是不是分层的，但是无法知道群体分成几个群合适，也无法看出群体间的基因交流，更无法看出个体的混血程度。这时候就需要群体分层图了。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/20.png" class="">
+<p>群体分层图的本质是堆叠的柱状图，和微生物研究中的物种组成柱状图类似。每个柱子是一个样本，可以看出一个样本的血缘组成，有几种颜色就说明该样本由几个祖先而来，如果只有一个色，那就说明这个个体很纯。<br>
+常用的软件有<em>structure</em>和<em>ADMIXTURE</em>$^{[19]}$。两款软件给出的结果都是$K$值。一般选择最低的点为最终的$K$值。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/21.png" class="">
+<p>群体分层图的可视化有个极强大的R包：Pophelper$^{[20]}$。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/22.png" class="">
+<h2 id="其他"><a class="header-anchor" href="#其他">¶</a>其他</h2>
+<p>可以将进化树和群体分层图结合进行展示，如下图：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/23.png" class="">
+<h1>连锁不平衡分析</h1>
+<p>先了解下概念，此处借鉴基迪奥生物网站的解释[22]。<br>
+要理解 LD 衰减图，我们就必须先理解连锁不平衡（Linkage disequilibrium，LD）的概念。连锁不平衡是由两个名词构成，连锁 + 不平衡。前者，很容易让我们产生概念混淆；后者，让这个概念变得愈加晦涩。因此从一个类似的概念入手，大家可能更容易理解 LD 的概念，那就是基因的共表达。<br>
+基因的共表达，通常指的是两个基因的表达量呈现相关性。比较常见的例子就是：转录组因子和靶基因间的关系。因为转录因子对它的靶基因有正调控作用，所以转录因子的表达量提高会导致靶基因的表达量也上调，两者往往存在正相关关系。这个正相关关系，可以使用相关系数 $r^2$ 来度量，这个数值在 - 1~1 之间。总而言之，相关性可以理解为两个元素共同变化，步调一致。<br>
+类似的，连锁不平衡（LD）就是度量两个分子标记的基因型变化是否步调一致，存在相关性的指标。如果两个 SNP 标记位置相邻，那么在群体中也会呈现基因型步调一致的情况。比如有两个基因座，分别对应 A/a 和 B/b 两种等位基因。如果两个基因座是相关的，我们将会看到某些基因型往往共同遗传，即某些单倍型的频率会高于期望值。<br>
+参照王荣焕等$^{[23]}$的方法进行LD参数计算：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/24.png" class="">
+<h2 id="LD衰减分析"><a class="header-anchor" href="#LD衰减分析">¶</a>LD衰减分析</h2>
+<p>随着标记间的距离增加，平均的LD程度将降低，呈现出衰减状态，这种情况叫LD衰减。LD衰减分析的作用：</p>
+<ul>
+<li>判断群体的多样性差异，一般野生型群体的LD衰减快于驯化群体；<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/25.png" class="">
+</li>
+<li>估计GWAS中标记的覆盖度，通过比较LD衰减距离(0.1)和标记间的平均距离来判断标记是否足够。</li>
+</ul>
+<hr>
+<h1>GWAS</h1>
+<p>GWAS(genome-wide association study)，全基因组关联分析，常用在医学和农学领域。简单理解成将SNP等遗传标记和表型数据进行关联分析，检测和表型相关的位点，然后再倒回去找到对应的基因，研究其对表型的影响。这些被研究的表型在医学上常常是疾病的表型；在农学上常常是受关注的农艺性状，比如水稻的株高、产量、穗粒数等。GWAS思想首次提出是在心肌梗塞的治疗上[24]，首次应用是在2005年的文章上$^{[25]}$。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/26.png" class="">
+<h2 id="GWAS流程"><a class="header-anchor" href="#GWAS流程">¶</a>GWAS流程</h2>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/27.png" class="">
+<ul>
+<li>样品准备就是要收集不同的个体，比如3KRGP就3000多个水稻材料[12]，然后对这些材料进行全基因组测序，还需要表型数据，比如水稻的株高、产量等。</li>
+<li>基因型的检测就是前面的变异检测，只是变异检测完的SNP数据还需要过滤才能进行后续的关联分析。</li>
+<li>关联分析这一步只需要将基因型数据和表型数据丢给软件就行了。</li>
+</ul>
+<h2 id="GWAS数学模型"><a class="header-anchor" href="#GWAS数学模型">¶</a>GWAS数学模型</h2>
+<p>目前使用最广泛的模型是混合线性模型$^{[26]}$：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/28.png" class="">
+<p>所有的参数软件（如Emmax）会自动完成计算。</p>
+<h2 id="GWAS结果"><a class="header-anchor" href="#GWAS结果">¶</a>GWAS结果</h2>
+<p>GWAS结果文件通常只有两个图，一个是曼哈顿图，另外一个是Q-Q图。一般是先看Q-Q图，如果Q-Q正常，曼哈顿图的结果才有意义。</p>
+<ul>
+<li>Q-Q图<br>
+用于推断关联分析使用的模型是否正确，如下图：<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/29.png" class="">
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/30.png" class="">
+</li>
+<li>如果模型不正确，那就只能换算法或者软件。</li>
+<li>曼哈顿图<br>
+之所以叫曼哈顿图，是由于这种图长得像曼哈顿：<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/31.png" class="">
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/32.png" class="">
+图中横着的虚线通常是研究者设定的，最严格的的阈值线是Bonfferonin($\frac{0.05}{total{SNPs}}$)。阈值线以上的点就是很值得关注的位点。<br>
+后续就是验证实验了，比如验证不同的单倍型的生物学功能。</li>
+</ul>
+<hr>
+<h1>其他统计指标和算法</h1>
+<h2 id="MSMC"><a class="header-anchor" href="#MSMC">¶</a>MSMC</h2>
+<p>MSMC（multiple sequentially Markovian coalescent）$^{[27]}$，底层算法很复杂，类似于PSMC。MSMC的主要功能是推断有效群体大小和群体分离历史。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/33.png" class="">这样看起来更直观：
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/34.png" class="">
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/35.png" class="">
+<h2 id="LAMP"><a class="header-anchor" href="#LAMP">¶</a>LAMP</h2>
+<p>LAMP(Local Ancestry in Admixed Populations，混杂群体的局部族源推断)，用于推断采用聚类的方法假设同时检测的位点间不存在重组情况，对每组相邻的 SNP 进行检测分析$^{[28]}$，在运算速度和推断准确度上都有了质的飞跃。</p>
+<h2 id="Treemix"><a class="header-anchor" href="#Treemix">¶</a>Treemix</h2>
+<p>用于推断群体分离和混合[29]。图是这样的：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/36.png" class="">
+<p>这种图和进化树长得特别相似，可以将得到的结果和进化树进行比较。如2019年NC上关于<em>Cushion willow</em>的文章中就用到了这种算法根据。图是这样的：</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/01.png" class="">
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/37.png" class="">
+<p>前文提到的很多软件和算法都是用来推断群体进化的，也就是找到群体的祖先。都可以看成族源推断。具体的差异可以参考综述<em>法医族源推断的分子生物学进展</em>$^{[31]}$。</p>
+<hr>
+<h1>群体重测序方案推荐</h1>
+<p>测序方案关系到后续的分析，不同的样本量对应不同的测序方法和分析方法。</p>
+<img src="/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/38.png" class="">
+<hr>
+<h1>参考文献</h1>
+<p>[1]. <a href="%5Bhttps://zh.wikipedia.org/wiki/%E8%87%AA%E7%84%B6%E9%80%89%E6%8B%25A">自然选择(维基百科)</a><br>
+[2]. Kimura, Motoo. “Evolutionary rate at the molecular level.” <em><strong>Nature</strong></em>. 217.5129 (1968): 624-626 .<br>
+[3]. <a target="_blank" rel="noopener" href="https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Costs-Data">测序价格变化趋势</a><br>
+[4]. <a target="_blank" rel="noopener" href="https://www.plabipd.de/timeline_view.ep">plant genomes</a><br>
+[5]. DePristo, Mark A., et al. “A framework for variation discovery and genotyping using next-generation DNA sequencing data.” <em><strong>Nature Genetics</strong></em>. 43.5 (2011): 491.<br>
+[6]. Biswas, Shameek, and Joshua M. Akey. “Genomic insights into positive selection.” <em><strong>TRENDS in Genetics</strong></em> . 22.8 (2006): 437-446.<br>
+[7]. Pavlidis, Pavlos, et al. “Sweed: likelihood-based detection of selective sweeps in thousands of genomes.” <em><strong>Molecular biology and evolution</strong></em> 30.9 (2013): 2224-2234.<br>
+[8]. Wang, Muhua, et al. “The genome sequence of African rice (<em>Oryza glaberrima</em>) and evidence for independent domestication.” <em><strong>Nature Genetics</strong></em> 46.9 (2014): 982.<br>
+[9]. Bamshad, Michael, and Stephen P. Wooding. “Signatures of natural selection in the human genome.” <em><strong>Nature Reviews Genetics</strong></em> 4.2 (2003): 99.<br>
+[10]. Siewert, Katherine M., and Benjamin F. Voight. “BetaScan2: Standardized statistics to detect balancing selection utilizing substitution data.” <em><strong>BioRxiv</strong></em> (2018): 497255.<br>
+[11]. Yu, N.; Jensen-Seaman MI; Chemnick L; Ryder O; Li WH (March 2004).  <em><strong>Genetics</strong></em>. 166 (3): 1375–83.<br>
+[12]. Wang, Wensheng, et al. “Genomic variation in 3,010 diverse accessions of Asian cultivated rice.” <em><strong>Nature</strong></em> 557.7703 (2018): 43.<br>
+[13]. Li, C., Zhou, A. &amp; Sang, T. Rice domestication by reducing shattering. <em><strong>Science</strong></em> 311, 1936–1939 (2006).<br>
+[14]. Tajima, Fumio. “Statistical method for testing the neutral mutation hypothesis by DNA polymorphism.” <em><strong>Genetics</strong></em> 123.3 (1989): 585-595.<br>
+[15]. Du, Xiongming, et al. “Resequencing of 243 diploid cotton accessions based on an updated A genome identifies the genetic basis of key agronomic traits.” <em><strong>Nature Genetics</strong></em> 50.6 (2018): 796.<br>
+[16]. Lu, Kun, et al. “Whole-genome resequencing reveals Brassica napus origin and genetic loci involved in its improvement.” <em><strong>Nature communications</strong></em>. 10.1 (2019): 1154.<br>
+[17]. Zhou, Z., Jiang, Y., Wang, Z. et al. Resequencing 302 wild and cultivated accessions identifies genes related to domestication and improvement in soybean. <em><strong>Nat Biotechnol</strong></em> 33, 408–414 (2015).<br>
+[18]. Liang, Z., Duan, S., Sheng, J. et al. Whole-genome resequencing of 472 Vitis accessions for grapevine diversity and demographic history analyses. <em><strong>Nat Commun</strong></em> 10, 1190 (2019).<br>
+[19]. Alexander, D.H., Lange, K. Enhancements to the ADMIXTURE algorithm for individual ancestry estimation. <em><strong>BMC Bioinformatics</strong></em> 12, 246 (2011).<br>
+[20]. Francis, Roy M. “pophelper: an R package and web app to analyse and visualize population structure.” <em><strong>Molecular ecology resources</strong></em> 17.1 (2017): 27-32.<br>
+[21]. <a target="_blank" rel="noopener" href="http://www.royfrancis.com/pophelper/articles/index.html">http://www.royfrancis.com/pophelper/articles/index.html</a>.<br>
+[22]. <a target="_blank" rel="noopener" href="https://www.omicshare.com/forum/thread-878-1-1.html">https://www.omicshare.com/forum/thread-878-1-1.html</a>.<br>
+[23]. WANG Rong-Huan, WANG Tian-Yu, LI Yu. Linkage disequilibrium in plant genomes[J]. <em><strong>HEREDITAS</strong></em>, 2007, 29(11): 1317-1323.<br>
+[24]. Ozaki, K., Ohnishi, Y., Iida, A. et al. Functional SNPs in the lymphotoxin-α gene that are associated with susceptibility to myocardial infarction. <em><strong>Nat Genet</strong></em> 32, 650–654 (2002).<br>
+[25]. Klein, Robert J., et al. “Complement factor H polymorphism in age-related macular degeneration.” <em><strong>Science</strong></em> 308.5720 (2005): 385-389.<br>
+[26]. Yu, Jianming, et al. “A unified mixed-model method for association mapping that accounts for multiple levels of relatedness.” <em><strong>Nature genetics</strong></em> 38.2 (2006): 203.<br>
+[27]. Schiffels, Stephan, and Richard Durbin. “Inferring human population size and separation history from multiple genome sequences.” <em><strong>Nature genetics</strong></em> 46.8 (2014): 919.<br>
+[28]. Sankararaman, Sriram, et al. “Estimating local ancestry in admixed populations.” <em><strong>The American Journal of Human Genetics</strong></em> 82.2 (2008): 290-303.<br>
+[29]. Pickrell, Joseph K., and Jonathan K. Pritchard. “Inference of population splits and mixtures from genome-wide allele frequency data.” <em><strong>PLoS genetics</strong></em> 8.11 (2012): e1002967.<br>
+[30]. Chen, Jia-hui, et al. “Genome-wide analysis of Cushion willow provides insights into alpine plant divergence in a biodiversity hotspot.” <em><strong>Nature communications</strong></em> 10.1 (2019): 1-12.<br>
+[31]. 孙宽，侯一平。法医族源推断的分子生物学进展 [J]. <em><strong>法医学杂志</strong></em>，2018,34 (03):286-293.<br>
+[32]. <a target="_blank" rel="noopener" href="http://www.genek.tv/">genek.tv</a></p>
+<hr>
+<blockquote>
+<p>💌lixiang117423@gmail.com</p>
+<p>💌lixiang117423@foxmail.com</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">小蓝哥</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://example.com/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/">http://example.com/2020/01/07/%E7%BE%A4%E4%BD%93%E9%81%97%E4%BC%A0%E5%AD%A6%E4%B8%8E%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%94%9F%E7%89%A9%E4%BF%A1%E6%81%AF%E5%AD%A6/">生物信息学</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/01/07/PCA%E5%9C%A8R%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AE%9E%E7%8E%B0/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">PCA在R语言中的实现</div></div></a></div><div class="next-post pull-right"><a href="/2020/01/07/PCA%E5%92%8CPERMANOVA%E5%88%86%E6%9E%90/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">PCA和PERMANOVA分析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>Related Articles</span></div><div class="relatedPosts-list"><div><a href="/2021/03/01/WGS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="WGS学习笔记"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-01</div><div class="title">WGS学习笔记</div></div></a></div><div><a href="/2021/06/01/iTAK%E7%AE%80%E6%98%8E%E6%95%99%E7%A8%8B/" title="iTAK简明教程"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-01</div><div class="title">iTAK简明教程</div></div></a></div><div><a href="/2020/01/09/iTOL%E4%BF%AE%E9%A5%B0%E8%BF%9B%E5%8C%96%E6%A0%91/" title="iTOL修饰进化树"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-09</div><div class="title">iTOL修饰进化树</div></div></a></div><div><a href="/2021/07/03/%C2%96Win10%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8CQIIME2/" title="Win10子系统安装运行QIIME2"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-03</div><div class="title">Win10子系统安装运行QIIME2</div></div></a></div><div><a href="/2020/01/07/%E9%80%9A%E8%BF%87Linux%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BD%BF%E7%94%A8Aspera%E5%85%A8%E9%80%9F%E4%B8%8A%E4%BC%A0%E6%B5%8B%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%88%B0NCBI%E6%95%B0%E6%8D%AE%E5%BA%93/" title="通过Linux命令行使用Aspera全速上传测序数据到NCBI数据库"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-01-07</div><div class="title">通过Linux命令行使用Aspera全速上传测序数据到NCBI数据库</div></div></a></div><div><a href="/2021/11/23/%E9%87%8D%E6%B5%8B%E5%BA%8F%E5%88%86%E6%9E%90%E8%84%9A%E6%9C%AC/" title="重测序分析脚本"><img class="cover" src="/img/cover/popgene.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-23</div><div class="title">重测序分析脚本</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">几种变异类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">重测序和从头组装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">重测序分析流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">群体进化选择</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E9%80%89%E6%8B%A9"><span class="toc-number">4.1.</span> <span class="toc-text">正选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9F%E9%80%89%E6%8B%A9"><span class="toc-number">4.2.</span> <span class="toc-text">负选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E8%A1%A1%E9%80%89%E6%8B%A9"><span class="toc-number">4.3.</span> <span class="toc-text">平衡选择</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">群体遗传学中的统计指标</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E4%BD%93%E5%A4%9A%E6%80%81%E6%80%A7%E5%8F%82%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">群体多态性参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E4%BD%8D%E7%82%B9%E6%95%B0%E7%9B%AE"><span class="toc-number">5.2.</span> <span class="toc-text">分离位点数目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E8%8B%B7%E9%85%B8%E5%A4%9A%E6%A0%B7%E6%80%A7-pi"><span class="toc-number">5.3.</span> <span class="toc-text">核苷酸多样性$\pi$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E4%BD%93%E5%86%85%E9%80%89%E6%8B%A9%E6%A3%80%E9%AA%8C%EF%BC%9ATajima%E2%80%99s-D"><span class="toc-number">5.4.</span> <span class="toc-text">群体内选择检验：Tajima’s D</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E4%BD%93%E9%97%B4%E5%88%86%E6%AD%A7%E5%BA%A6%E6%A3%80%E9%AA%8C%EF%BC%9A-F-st"><span class="toc-number">5.5.</span> <span class="toc-text">群体间分歧度检验：$F_{st}$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E4%BD%93%E5%88%86%E6%AD%A7%E5%BA%A6%E6%A3%80%E9%AA%8C%EF%BC%9AROD"><span class="toc-number">5.6.</span> <span class="toc-text">群体分歧度检验：ROD</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">群体结构分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E6%A0%91"><span class="toc-number">6.1.</span> <span class="toc-text">进化树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E6%A0%91%E7%AE%97%E6%B3%95"><span class="toc-number">6.1.1.</span> <span class="toc-text">进化树算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E8%B7%9D%E7%A6%BB"><span class="toc-number">6.1.1.1.</span> <span class="toc-text">基于距离</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E7%89%B9%E5%BE%81"><span class="toc-number">6.1.1.2.</span> <span class="toc-text">基于特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E6%A0%91%E7%B1%BB%E5%9E%8B"><span class="toc-number">6.1.2.</span> <span class="toc-text">进化树类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%8C%96%E6%A0%91%E8%BD%AF%E4%BB%B6"><span class="toc-number">6.1.3.</span> <span class="toc-text">进化树软件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PCA%E5%9B%BE"><span class="toc-number">6.2.</span> <span class="toc-text">PCA图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BE%A4%E4%BD%93%E5%88%86%E5%B1%82%E5%9B%BE"><span class="toc-number">6.3.</span> <span class="toc-text">群体分层图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">6.4.</span> <span class="toc-text">其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">连锁不平衡分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LD%E8%A1%B0%E5%87%8F%E5%88%86%E6%9E%90"><span class="toc-number">7.1.</span> <span class="toc-text">LD衰减分析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">GWAS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GWAS%E6%B5%81%E7%A8%8B"><span class="toc-number">8.1.</span> <span class="toc-text">GWAS流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GWAS%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B"><span class="toc-number">8.2.</span> <span class="toc-text">GWAS数学模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GWAS%E7%BB%93%E6%9E%9C"><span class="toc-number">8.3.</span> <span class="toc-text">GWAS结果</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">其他统计指标和算法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MSMC"><span class="toc-number">9.1.</span> <span class="toc-text">MSMC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LAMP"><span class="toc-number">9.2.</span> <span class="toc-text">LAMP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Treemix"><span class="toc-number">9.3.</span> <span class="toc-text">Treemix</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">群体重测序方案推荐</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">11.</span> <span class="toc-text">参考文献</span></a></li></ol></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2021 By 小蓝哥</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">簡</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
